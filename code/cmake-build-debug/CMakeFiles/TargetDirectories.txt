@@ -1,0 +1,3 @@
+D:/cubli/code/cmake-build-debug/CMakeFiles/code.elf.dir
+D:/cubli/code/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/cubli/code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
