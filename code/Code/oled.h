@@ -1,48 +1,52 @@
 #ifndef __OLED_H
-#define __OLED_H
+#define __OLED_H			  	 
 #include "sys.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌĞòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßĞí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK STM32F407¿ª·¢°å
-//OLEDÇı¶¯´úÂë	   
-//ÕıµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//´´½¨ÈÕÆÚ:2017/4/8
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓĞ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾ 2014-2024
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
-//OLEDÄ£Ê½ÉèÖÃ
-//0: 4Ïß´®ĞĞÄ£Ê½  £¨Ä£¿éµÄBS1£¬BS2¾ù½ÓGND£©
-//1: ²¢ĞĞ8080Ä£Ê½ £¨Ä£¿éµÄBS1£¬BS2¾ù½ÓVCC£©
-#define OLED_MODE 	1
-		    						  
-//-----------------OLED¶Ë¿Ú¶¨Òå----------------  		
-#define OLED_CS     PBout(7)
-#define OLED_RST    PGout(15)
-#define OLED_RS     PDout(6)
-#define OLED_WR     PAout(4)
-#define OLED_RD     PDout(7)
- 
-//Ê¹ÓÃ4Ïß´®ĞĞ½Ó¿ÚÊ±Ê¹ÓÃ 
-#define OLED_SCLK   PCout(6)
-#define OLED_SDIN   PCout(7)
+#include "stdlib.h"
 
-#define OLED_CMD  	0		//Ğ´ÃüÁî
-#define OLED_DATA 	1		//Ğ´Êı¾İ
+#define OLED_MODE 0
+#define SIZE 8
+#define XLevelL		0x00
+#define XLevelH		0x10
+#define Max_Column	128
+#define Max_Row		64
+#define	Brightness	0xFF 
+#define X_WIDTH 	128
+#define Y_WIDTH 	64	    						  
 
-//OLED¿ØÖÆÓÃº¯Êı
-void OLED_WR_Byte(u8 dat,u8 cmd);	    
+#define OLED_SCLK_Clr() HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_RESET)//SCL
+#define OLED_SCLK_Set() HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_SET)
+
+#define OLED_SDIN_Clr() HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_RESET)//SDA
+#define OLED_SDIN_Set() HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_SET)
+
+
+ 		     
+#define OLED_CMD  0	    //å†™å‘½ä»¤
+#define OLED_DATA 1	    //å†™æ•°æ®
+
+
+
+void OLED_WR_Byte(unsigned dat,unsigned cmd);  
 void OLED_Display_On(void);
-void OLED_Display_Off(void);
-void OLED_Refresh_Gram(void);		   
-							   		    
+void OLED_Display_Off(void);	   							   		    
 void OLED_Init(void);
-void OLED_Clear(void);
 void OLED_DrawPoint(u8 x,u8 y,u8 t);
 void OLED_Fill(u8 x1,u8 y1,u8 x2,u8 y2,u8 dot);
-void OLED_ShowChar(u8 x,u8 y,u8 chr,u8 size,u8 mode);
+void OLED_ShowChar(u8 x,u8 y,u8 chr,u8 Char_Size);
 void OLED_ShowNum(u8 x,u8 y,u32 num,u8 len,u8 size);
-void OLED_ShowString(u8 x,u8 y,const u8 *p,u8 size);
-#endif
+void OLED_ShowString(u8 x,u8 y, u8 *p,u8 Char_Size);	 
+void OLED_Set_Pos(unsigned char x, unsigned char y);
+void OLED_ShowCHinese(u8 x,u8 y,u8 no);
+void fill_picture(unsigned char fill_Data);
+void IICO_Start(void);
+void IICO_Stop(void);
+void IICO_Wait_Ack(void);
+void Write_IIC_Command(unsigned char IIC_Command);
+void Write_IIC_Data(unsigned char IIC_Data);
+void Write_IIC_Byte(unsigned char IIC_Byte);
+void OLED_Clear(void);
+#endif  
+	 
+
+
+

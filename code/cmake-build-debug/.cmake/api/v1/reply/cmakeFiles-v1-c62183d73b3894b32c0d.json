@@ -7,6 +7,11 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
+			"path" : "D:/Clion/CLion 221.5080.1/bin/cmake/win/share/cmake-3.21/Modules/CMakeMinGWFindMake.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
 			"path" : "D:/Clion/CLion 221.5080.1/bin/cmake/win/share/cmake-3.21/Modules/CMakeDetermineSystem.cmake"
 		},
 		{
@@ -943,6 +948,21 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
+			"path" : "D:/Clion/CLion 221.5080.1/bin/cmake/win/share/cmake-3.21/Modules/CMakeFindCodeBlocks.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Clion/CLion 221.5080.1/bin/cmake/win/share/cmake-3.21/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Clion/CLion 221.5080.1/bin/cmake/win/share/cmake-3.21/Modules/ProcessorCount.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
 			"path" : "D:/Clion/CLion 221.5080.1/bin/cmake/win/share/cmake-3.21/Modules/CMakeCInformation.cmake"
 		},
 		{
@@ -1147,8 +1167,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "D:/cubli/code/cmake-build-debug",
-		"source" : "D:/cubli/code"
+		"build" : "D:/cubli/cubli/code/cmake-build-debug",
+		"source" : "D:/cubli/cubli/code"
 	},
 	"version" : 
 	{

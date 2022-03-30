@@ -94,33 +94,33 @@ void uart_init(u32 bound)
 //此函数会被HAL_UART_Init()调用
 //huart:串口句柄
 
-void HAL_UART_MspInit(UART_HandleTypeDef *huart)
-{
-    //GPIO端口设置
-	GPIO_InitTypeDef GPIO_Initure;
-	
-	if(huart->Instance==USART1)//如果是串口1，进行串口1 MSP初始化
-	{
-		__HAL_RCC_GPIOA_CLK_ENABLE();			//使能GPIOA时钟
-		__HAL_RCC_USART1_CLK_ENABLE();			//使能USART1时钟
-		__HAL_RCC_AFIO_CLK_ENABLE();
-	
-		GPIO_Initure.Pin=GPIO_PIN_9;			//PA9
-		GPIO_Initure.Mode=GPIO_MODE_AF_PP;		//复用推挽输出
-		GPIO_Initure.Pull=GPIO_PULLUP;			//上拉
-		GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;//高速
-		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	//初始化PA9
-
-		GPIO_Initure.Pin=GPIO_PIN_10;			//PA10
-		GPIO_Initure.Mode=GPIO_MODE_AF_INPUT;	//模式要设置为复用输入模式！	
-		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	//初始化PA10
-		
-#if EN_USART1_RX
-		HAL_NVIC_EnableIRQ(USART1_IRQn);				//使能USART1中断通道
-		HAL_NVIC_SetPriority(USART1_IRQn,3,3);			//抢占优先级3，子优先级3
-#endif	
-	}
-}
+//void HAL_UART_MspInit(UART_HandleTypeDef *huart)
+//{
+//    //GPIO端口设置
+//	GPIO_InitTypeDef GPIO_Initure;
+//
+//	if(huart->Instance==USART1)//如果是串口1，进行串口1 MSP初始化
+//	{
+//		__HAL_RCC_GPIOA_CLK_ENABLE();			//使能GPIOA时钟
+//		__HAL_RCC_USART1_CLK_ENABLE();			//使能USART1时钟
+//		__HAL_RCC_AFIO_CLK_ENABLE();
+//
+//		GPIO_Initure.Pin=GPIO_PIN_9;			//PA9
+//		GPIO_Initure.Mode=GPIO_MODE_AF_PP;		//复用推挽输出
+//		GPIO_Initure.Pull=GPIO_PULLUP;			//上拉
+//		GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;//高速
+//		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	//初始化PA9
+//
+//		GPIO_Initure.Pin=GPIO_PIN_10;			//PA10
+//		GPIO_Initure.Mode=GPIO_MODE_AF_INPUT;	//模式要设置为复用输入模式！
+//		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	//初始化PA10
+//
+//#if EN_USART1_RX
+//		HAL_NVIC_EnableIRQ(USART1_IRQn);				//使能USART1中断通道
+//		HAL_NVIC_SetPriority(USART1_IRQn,3,3);			//抢占优先级3，子优先级3
+//#endif
+//	}
+//}
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {

@@ -1,4 +1,4 @@
-"D:\Clion\CLion 221.5080.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/Clion/CLion 221.5080.1/bin/ninja/win/ninja.exe" -DCMAKE_C_COMPILER=D:/stm32cubemx/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc.exe -DCMAKE_CXX_COMPILER=D:/stm32cubemx/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++.exe -G Ninja -S D:\cubli\code -B D:\cubli\code\cmake-build-debug
+"D:\Clion\CLion 221.5080.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=D:/stm32cubemx/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc.exe -DCMAKE_CXX_COMPILER=D:/stm32cubemx/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++.exe -G "CodeBlocks - MinGW Makefiles" -S D:\cubli\cubli\code -B D:\cubli\cubli\code\cmake-build-debug
 -- The C compiler identification is GNU 10.3.1
 -- The CXX compiler identification is GNU 10.3.1
 -- The ASM compiler identification is GNU
@@ -16,4 +16,4 @@
 -- Minimal optimization, debug info included
 -- Configuring done
 -- Generating done
--- Build files have been written to: D:/cubli/code/cmake-build-debug
+-- Build files have been written to: D:/cubli/cubli/code/cmake-build-debug

@@ -4,24 +4,24 @@
 #include "usart.h"   
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32F407开发板
+//ALIENTEK NANO STM32F103开发板 
 //MPU6050 驱动代码	   
 //正点原子@ALIENTEK
 //技术论坛:www.openedv.com
-//创建日期:2017/4/15
+//创建日期:2018/7/28
 //版本：V1.0
 //版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
+//Copyright(C) 广州市星翼电子科技有限公司 208-2028
 //All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
-
+////////////////////////////////////////////////////////////////////////////////// 
+ 
 //初始化MPU6050
 //返回值:0,成功
 //    其他,错误代码
 u8 MPU_Init(void)
 { 
-	u8 res;
-	IIC_Init();//初始化IIC总线
+	u8 res; 
+	MPU_IIC_Init();//初始化IIC总线
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X80);	//复位MPU6050
     delay_ms(100);
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X00);	//唤醒MPU6050 
@@ -32,7 +32,7 @@ u8 MPU_Init(void)
 	MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
 	MPU_Write_Byte(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
 	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
-	res=MPU_Read_Byte(MPU_DEVICE_ID_REG);
+	res=MPU_Read_Byte(MPU_DEVICE_ID_REG); 
 	if(res==MPU_ADDR)//器件ID正确
 	{
 		MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X01);	//设置CLKSEL,PLL X轴为参考
@@ -140,25 +140,25 @@ u8 MPU_Get_Accelerometer(short *ax,short *ay,short *az)
 u8 MPU_Write_Len(u8 addr,u8 reg,u8 len,u8 *buf)
 {
 	u8 i; 
-    IIC_Start(); 
-	IIC_Send_Byte((addr<<1)|0);//发送器件地址+写命令	
-	if(IIC_Wait_Ack())	//等待应答
+    MPU_IIC_Start(); 
+	MPU_IIC_Send_Byte((addr<<1)|0);//发送器件地址+写命令	
+	if(MPU_IIC_Wait_Ack())	//等待应答
 	{
-		IIC_Stop();		 
+		MPU_IIC_Stop();		 
 		return 1;		
 	}
-    IIC_Send_Byte(reg);	//写寄存器地址
-    IIC_Wait_Ack();		//等待应答
+    MPU_IIC_Send_Byte(reg);	//写寄存器地址
+    MPU_IIC_Wait_Ack();		//等待应答
 	for(i=0;i<len;i++)
 	{
-		IIC_Send_Byte(buf[i]);	//发送数据
-		if(IIC_Wait_Ack())		//等待ACK
+		MPU_IIC_Send_Byte(buf[i]);	//发送数据
+		if(MPU_IIC_Wait_Ack())		//等待ACK
 		{
-			IIC_Stop();	 
+			MPU_IIC_Stop();	 
 			return 1;		 
 		}		
 	}    
-    IIC_Stop();	 
+    MPU_IIC_Stop();	 
 	return 0;	
 } 
 //IIC连续读
@@ -170,26 +170,26 @@ u8 MPU_Write_Len(u8 addr,u8 reg,u8 len,u8 *buf)
 //    其他,错误代码
 u8 MPU_Read_Len(u8 addr,u8 reg,u8 len,u8 *buf)
 { 
- 	IIC_Start(); 
-	IIC_Send_Byte((addr<<1)|0);//发送器件地址+写命令	
-	if(IIC_Wait_Ack())	//等待应答
+ 	MPU_IIC_Start(); 
+	MPU_IIC_Send_Byte((addr<<1)|0);//发送器件地址+写命令	
+	if(MPU_IIC_Wait_Ack())	//等待应答
 	{
-		IIC_Stop();		 
+		MPU_IIC_Stop();		 
 		return 1;		
 	}
-    IIC_Send_Byte(reg);	//写寄存器地址
-    IIC_Wait_Ack();		//等待应答
-    IIC_Start();
-	IIC_Send_Byte((addr<<1)|1);//发送器件地址+读命令	
-    IIC_Wait_Ack();		//等待应答 
+    MPU_IIC_Send_Byte(reg);	//写寄存器地址
+    MPU_IIC_Wait_Ack();		//等待应答
+    MPU_IIC_Start();
+	MPU_IIC_Send_Byte((addr<<1)|1);//发送器件地址+读命令	
+    MPU_IIC_Wait_Ack();		//等待应答 
 	while(len)
 	{
-		if(len==1)*buf=IIC_Read_Byte(0);//读数据,发送nACK 
-		else *buf=IIC_Read_Byte(1);		//读数据,发送ACK  
+		if(len==1)*buf=MPU_IIC_Read_Byte(0);//读数据,发送nACK 
+		else *buf=MPU_IIC_Read_Byte(1);		//读数据,发送ACK  
 		len--;
 		buf++; 
 	}    
-    IIC_Stop();	//产生一个停止条件 
+    MPU_IIC_Stop();	//产生一个停止条件 
 	return 0;	
 }
 //IIC写一个字节 
@@ -199,22 +199,22 @@ u8 MPU_Read_Len(u8 addr,u8 reg,u8 len,u8 *buf)
 //    其他,错误代码
 u8 MPU_Write_Byte(u8 reg,u8 data) 				 
 { 
-    IIC_Start(); 
-	IIC_Send_Byte((MPU_ADDR<<1)|0);//发送器件地址+写命令	
-	if(IIC_Wait_Ack())	//等待应答
+    MPU_IIC_Start(); 
+	MPU_IIC_Send_Byte((MPU_ADDR<<1)|0);//发送器件地址+写命令	
+	if(MPU_IIC_Wait_Ack())	//等待应答
 	{
-		IIC_Stop();		 
+		MPU_IIC_Stop();		 
 		return 1;		
 	}
-    IIC_Send_Byte(reg);	//写寄存器地址
-    IIC_Wait_Ack();		//等待应答 
-	IIC_Send_Byte(data);//发送数据
-	if(IIC_Wait_Ack())	//等待ACK
+    MPU_IIC_Send_Byte(reg);	//写寄存器地址
+    MPU_IIC_Wait_Ack();		//等待应答 
+	MPU_IIC_Send_Byte(data);//发送数据
+	if(MPU_IIC_Wait_Ack())	//等待ACK
 	{
-		IIC_Stop();	 
+		MPU_IIC_Stop();	 
 		return 1;		 
 	}		 
-    IIC_Stop();	 
+    MPU_IIC_Stop();	 
 	return 0;
 }
 //IIC读一个字节 
@@ -223,16 +223,16 @@ u8 MPU_Write_Byte(u8 reg,u8 data)
 u8 MPU_Read_Byte(u8 reg)
 {
 	u8 res;
-    IIC_Start(); 
-	IIC_Send_Byte((MPU_ADDR<<1)|0);//发送器件地址+写命令	
-	IIC_Wait_Ack();		//等待应答 
-    IIC_Send_Byte(reg);	//写寄存器地址
-    IIC_Wait_Ack();		//等待应答
-    IIC_Start();
-	IIC_Send_Byte((MPU_ADDR<<1)|1);//发送器件地址+读命令	
-    IIC_Wait_Ack();		//等待应答 
-	res=IIC_Read_Byte(0);//读取数据,发送nACK 
-    IIC_Stop();			//产生一个停止条件 
+    MPU_IIC_Start(); 
+	MPU_IIC_Send_Byte((MPU_ADDR<<1)|0);//发送器件地址+写命令	
+	MPU_IIC_Wait_Ack();		//等待应答 
+    MPU_IIC_Send_Byte(reg);	//写寄存器地址
+    MPU_IIC_Wait_Ack();		//等待应答
+    MPU_IIC_Start();
+	MPU_IIC_Send_Byte((MPU_ADDR<<1)|1);//发送器件地址+读命令	
+    MPU_IIC_Wait_Ack();		//等待应答 
+	res=MPU_IIC_Read_Byte(0);//读取数据,发送nACK 
+    MPU_IIC_Stop();			//产生一个停止条件 
 	return res;		
 }
 
