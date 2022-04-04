@@ -2,43 +2,36 @@
 #include "sys.h"
 #include "delay.h"
 #include "usart.h"   
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK NANO STM32F103开发板 
-//MPU6050 驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2018/7/28
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 208-2028
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 
- 
+
+
+short gyroX,gyroY,gyroZ;
+short accX,accY,accZ;
+
+
+
 //初始化MPU6050
 //返回值:0,成功
 //    其他,错误代码
 u8 MPU_Init(void)
 { 
-	u8 res; 
-	MPU_IIC_Init();//初始化IIC总线
+	u8 res;
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X80);	//复位MPU6050
     delay_ms(100);
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X00);	//唤醒MPU6050 
 	MPU_Set_Gyro_Fsr(3);					//陀螺仪传感器,±2000dps
-	MPU_Set_Accel_Fsr(0);					//加速度传感器,±2g
-	MPU_Set_Rate(50);						//设置采样率50Hz
-	MPU_Write_Byte(MPU_INT_EN_REG,0X00);	//关闭所有中断
-	MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
-	MPU_Write_Byte(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
-	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
-	res=MPU_Read_Byte(MPU_DEVICE_ID_REG); 
-	if(res==MPU_ADDR)//器件ID正确
-	{
-		MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X01);	//设置CLKSEL,PLL X轴为参考
-		MPU_Write_Byte(MPU_PWR_MGMT2_REG,0X00);	//加速度与陀螺仪都工作
-		MPU_Set_Rate(50);						//设置采样率为50Hz
- 	}else return 1;
+	MPU_Set_Accel_Fsr(2);					//加速度传感器,±8g
+	MPU_Set_Rate(1000);						//设置采样率1000Hz
+//	MPU_Write_Byte(MPU_INT_EN_REG,0X00);	//关闭所有中断
+//	MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
+//	MPU_Write_Byte(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
+//	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
+//	res=MPU_Read_Byte(MPU_DEVICE_ID_REG);
+//	if(res==MPU_ADDR)//器件ID正确
+//	{
+//		MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X01);	//设置CLKSEL,PLL X轴为参考
+//		MPU_Write_Byte(MPU_PWR_MGMT2_REG,0X00);	//加速度与陀螺仪都工作
+//		MPU_Set_Rate(1000);						//设置采样率为1000Hz
+// 	}else return 1;
 	return 0;
 }
 //设置MPU6050陀螺仪传感器满量程范围
@@ -102,33 +95,29 @@ short MPU_Get_Temperature(void)
 //gx,gy,gz:陀螺仪x,y,z轴的原始读数(带符号)
 //返回值:0,成功
 //    其他,错误代码
-u8 MPU_Get_Gyroscope(short *gx,short *gy,short *gz)
+void MPU_Get_Gyroscope(void)
 {
-    u8 buf[6],res;  
-	res=MPU_Read_Len(MPU_ADDR,MPU_GYRO_XOUTH_REG,6,buf);
-	if(res==0)
-	{
-		*gx=((u16)buf[0]<<8)|buf[1];  
-		*gy=((u16)buf[2]<<8)|buf[3];  
-		*gz=((u16)buf[4]<<8)|buf[5];
-	} 	
-    return res;;
+    u8 buf[2];
+	MPU_Read_Len(MPU_ADDR,MPU_GYRO_XOUTH_REG,2,buf);
+    gyroX=((u16)buf[0]<<8)|buf[1];
+    MPU_Read_Len(MPU_ADDR,MPU_GYRO_YOUTH_REG,2,buf);
+    gyroY=((u16)buf[0]<<8)|buf[1];
+    MPU_Read_Len(MPU_ADDR,MPU_GYRO_ZOUTH_REG,2,buf);
+    gyroZ=((u16)buf[0]<<8)|buf[1];
 }
 //得到加速度值(原始值)
 //gx,gy,gz:陀螺仪x,y,z轴的原始读数(带符号)
 //返回值:0,成功
 //    其他,错误代码
-u8 MPU_Get_Accelerometer(short *ax,short *ay,short *az)
+void MPU_Get_Accelerometer(void)
 {
-    u8 buf[6],res;  
-	res=MPU_Read_Len(MPU_ADDR,MPU_ACCEL_XOUTH_REG,6,buf);
-	if(res==0)
-	{
-		*ax=((u16)buf[0]<<8)|buf[1];  
-		*ay=((u16)buf[2]<<8)|buf[3];  
-		*az=((u16)buf[4]<<8)|buf[5];
-	} 	
-    return res;;
+    u8 buf[2];
+	MPU_Read_Len(MPU_ADDR,MPU_ACCEL_XOUTH_REG,2,buf);
+    accX=((u16)buf[0]<<8)|buf[1];
+    MPU_Read_Len(MPU_ADDR,MPU_ACCEL_YOUTH_REG,2,buf);
+    accY=((u16)buf[0]<<8)|buf[1];
+    MPU_Read_Len(MPU_ADDR,MPU_ACCEL_ZOUTH_REG,2,buf);
+    accZ=((u16)buf[0]<<8)|buf[1];
 }
 //IIC连续写
 //addr:器件地址 
@@ -197,7 +186,7 @@ u8 MPU_Read_Len(u8 addr,u8 reg,u8 len,u8 *buf)
 //data:数据
 //返回值:0,正常
 //    其他,错误代码
-u8 MPU_Write_Byte(u8 reg,u8 data) 				 
+u8  MPU_Write_Byte(u8 reg,u8 data)
 { 
     MPU_IIC_Start(); 
 	MPU_IIC_Send_Byte((MPU_ADDR<<1)|0);//发送器件地址+写命令	

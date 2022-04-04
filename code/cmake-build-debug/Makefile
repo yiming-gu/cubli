@@ -128,6 +128,78 @@ code.elf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/build
 .PHONY : code.elf/fast
 
+Code/FreeRTOSTasks.obj: Code/FreeRTOSTasks.c.obj
+.PHONY : Code/FreeRTOSTasks.obj
+
+# target to build an object file
+Code/FreeRTOSTasks.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/FreeRTOSTasks.c.obj
+.PHONY : Code/FreeRTOSTasks.c.obj
+
+Code/FreeRTOSTasks.i: Code/FreeRTOSTasks.c.i
+.PHONY : Code/FreeRTOSTasks.i
+
+# target to preprocess a source file
+Code/FreeRTOSTasks.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/FreeRTOSTasks.c.i
+.PHONY : Code/FreeRTOSTasks.c.i
+
+Code/FreeRTOSTasks.s: Code/FreeRTOSTasks.c.s
+.PHONY : Code/FreeRTOSTasks.s
+
+# target to generate assembly for a file
+Code/FreeRTOSTasks.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/FreeRTOSTasks.c.s
+.PHONY : Code/FreeRTOSTasks.c.s
+
+Code/angle.obj: Code/angle.c.obj
+.PHONY : Code/angle.obj
+
+# target to build an object file
+Code/angle.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/angle.c.obj
+.PHONY : Code/angle.c.obj
+
+Code/angle.i: Code/angle.c.i
+.PHONY : Code/angle.i
+
+# target to preprocess a source file
+Code/angle.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/angle.c.i
+.PHONY : Code/angle.c.i
+
+Code/angle.s: Code/angle.c.s
+.PHONY : Code/angle.s
+
+# target to generate assembly for a file
+Code/angle.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/angle.c.s
+.PHONY : Code/angle.c.s
+
+Code/control.obj: Code/control.c.obj
+.PHONY : Code/control.obj
+
+# target to build an object file
+Code/control.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/control.c.obj
+.PHONY : Code/control.c.obj
+
+Code/control.i: Code/control.c.i
+.PHONY : Code/control.i
+
+# target to preprocess a source file
+Code/control.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/control.c.i
+.PHONY : Code/control.c.i
+
+Code/control.s: Code/control.c.s
+.PHONY : Code/control.s
+
+# target to generate assembly for a file
+Code/control.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/control.c.s
+.PHONY : Code/control.c.s
+
 Code/mpu6050.obj: Code/mpu6050.c.obj
 .PHONY : Code/mpu6050.obj
 
@@ -199,6 +271,30 @@ Code/oled.s: Code/oled.c.s
 Code/oled.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/oled.c.s
 .PHONY : Code/oled.c.s
+
+Code/retarget.obj: Code/retarget.c.obj
+.PHONY : Code/retarget.obj
+
+# target to build an object file
+Code/retarget.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/retarget.c.obj
+.PHONY : Code/retarget.c.obj
+
+Code/retarget.i: Code/retarget.c.i
+.PHONY : Code/retarget.i
+
+# target to preprocess a source file
+Code/retarget.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/retarget.c.i
+.PHONY : Code/retarget.c.i
+
+Code/retarget.s: Code/retarget.c.s
+.PHONY : Code/retarget.s
+
+# target to generate assembly for a file
+Code/retarget.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\code.elf.dir\build.make CMakeFiles/code.elf.dir/Code/retarget.c.s
+.PHONY : Code/retarget.c.s
 
 Core/Src/delay.obj: Core/Src/delay.c.obj
 .PHONY : Core/Src/delay.obj
@@ -1009,6 +1105,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... code.elf
+	@echo ... Code/FreeRTOSTasks.obj
+	@echo ... Code/FreeRTOSTasks.i
+	@echo ... Code/FreeRTOSTasks.s
+	@echo ... Code/angle.obj
+	@echo ... Code/angle.i
+	@echo ... Code/angle.s
+	@echo ... Code/control.obj
+	@echo ... Code/control.i
+	@echo ... Code/control.s
 	@echo ... Code/mpu6050.obj
 	@echo ... Code/mpu6050.i
 	@echo ... Code/mpu6050.s
@@ -1018,6 +1123,9 @@ help:
 	@echo ... Code/oled.obj
 	@echo ... Code/oled.i
 	@echo ... Code/oled.s
+	@echo ... Code/retarget.obj
+	@echo ... Code/retarget.i
+	@echo ... Code/retarget.s
 	@echo ... Core/Src/delay.obj
 	@echo ... Core/Src/delay.i
 	@echo ... Core/Src/delay.s

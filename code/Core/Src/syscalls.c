@@ -13,7 +13,7 @@
 **
 **  Target      : STMicroelectronics STM32
 **
-**  Distribution: The file is distributed ¡°as is,¡± without any warranty
+**  Distribution: The file is distributed ï¿½ï¿½as is,ï¿½ï¿½ without any warranty
 **                of any kind.
 **
 *****************************************************************************
@@ -135,28 +135,6 @@ caddr_t _sbrk(int incr)
 	heap_end += incr;
 
 	return (caddr_t) prev_heap_end;
-}
-
-int _close(int file)
-{
-	return -1;
-}
-
-
-int _fstat(int file, struct stat *st)
-{
-	st->st_mode = S_IFCHR;
-	return 0;
-}
-
-int _isatty(int file)
-{
-	return 1;
-}
-
-int _lseek(int file, int ptr, int dir)
-{
-	return 0;
 }
 
 int _open(char *path, int flags, ...)

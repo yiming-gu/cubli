@@ -1,17 +1,6 @@
 #include "mpuiic.h"
 #include "delay.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK NANO STM32F103开发板
-//MPU6050 IIC驱动 代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2018/7/28
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2018-2028
-//All rights reserved									  
-//////////////////////////////////////////////////////////////////////////////////
+
  
   //MPU IIC 延时函数
 void MPU_IIC_Delay(void)
@@ -19,23 +8,6 @@ void MPU_IIC_Delay(void)
 	delay_us(2);
 }
 
-//初始化IIC
-void MPU_IIC_Init(void)
-{					     
-	GPIO_InitTypeDef GPIO_Initure;
-	
-	__HAL_RCC_GPIOA_CLK_ENABLE();           //开启GPIOA时钟
-	 
-    GPIO_Initure.Pin=GPIO_PIN_2|GPIO_PIN_3; //PA2、PA3
-    GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;  //推挽输出
-    GPIO_Initure.Pull=GPIO_PULLUP;          //上拉
-    GPIO_Initure.Speed=GPIO_SPEED_HIGH;    	//高速
-	
-    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2|GPIO_PIN_3,GPIO_PIN_SET);//PB11,PB12 输出高	
-	
-	HAL_GPIO_Init(GPIOA,&GPIO_Initure);
- 
-}
 //产生IIC起始信号
 void MPU_IIC_Start(void)
 {
@@ -140,21 +112,5 @@ u8 MPU_IIC_Read_Byte(unsigned char ack)
         MPU_IIC_Ack(); //发送ACK   
     return receive;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

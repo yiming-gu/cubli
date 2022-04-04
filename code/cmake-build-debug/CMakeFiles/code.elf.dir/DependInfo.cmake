@@ -33,9 +33,13 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/cubli/cubli/code/Code/FreeRTOSTasks.c" "CMakeFiles/code.elf.dir/Code/FreeRTOSTasks.c.obj" "gcc" "CMakeFiles/code.elf.dir/Code/FreeRTOSTasks.c.obj.d"
+  "D:/cubli/cubli/code/Code/angle.c" "CMakeFiles/code.elf.dir/Code/angle.c.obj" "gcc" "CMakeFiles/code.elf.dir/Code/angle.c.obj.d"
+  "D:/cubli/cubli/code/Code/control.c" "CMakeFiles/code.elf.dir/Code/control.c.obj" "gcc" "CMakeFiles/code.elf.dir/Code/control.c.obj.d"
   "D:/cubli/cubli/code/Code/mpu6050.c" "CMakeFiles/code.elf.dir/Code/mpu6050.c.obj" "gcc" "CMakeFiles/code.elf.dir/Code/mpu6050.c.obj.d"
   "D:/cubli/cubli/code/Code/mpuiic.c" "CMakeFiles/code.elf.dir/Code/mpuiic.c.obj" "gcc" "CMakeFiles/code.elf.dir/Code/mpuiic.c.obj.d"
   "D:/cubli/cubli/code/Code/oled.c" "CMakeFiles/code.elf.dir/Code/oled.c.obj" "gcc" "CMakeFiles/code.elf.dir/Code/oled.c.obj.d"
+  "D:/cubli/cubli/code/Code/retarget.c" "CMakeFiles/code.elf.dir/Code/retarget.c.obj" "gcc" "CMakeFiles/code.elf.dir/Code/retarget.c.obj.d"
   "D:/cubli/cubli/code/Core/Src/delay.c" "CMakeFiles/code.elf.dir/Core/Src/delay.c.obj" "gcc" "CMakeFiles/code.elf.dir/Core/Src/delay.c.obj.d"
   "D:/cubli/cubli/code/Core/Src/freertos.c" "CMakeFiles/code.elf.dir/Core/Src/freertos.c.obj" "gcc" "CMakeFiles/code.elf.dir/Core/Src/freertos.c.obj.d"
   "D:/cubli/cubli/code/Core/Src/main.c" "CMakeFiles/code.elf.dir/Core/Src/main.c.obj" "gcc" "CMakeFiles/code.elf.dir/Core/Src/main.c.obj.d"

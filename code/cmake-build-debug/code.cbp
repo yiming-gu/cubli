@@ -102,6 +102,24 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/cubli/cubli/code/Code/FreeRTOSTasks.c">
+			<Option target="code.elf"/>
+		</Unit>
+		<Unit filename="D:/cubli/cubli/code/Code/FreeRTOSTasks.h">
+			<Option target="code.elf"/>
+		</Unit>
+		<Unit filename="D:/cubli/cubli/code/Code/angle.c">
+			<Option target="code.elf"/>
+		</Unit>
+		<Unit filename="D:/cubli/cubli/code/Code/angle.h">
+			<Option target="code.elf"/>
+		</Unit>
+		<Unit filename="D:/cubli/cubli/code/Code/control.c">
+			<Option target="code.elf"/>
+		</Unit>
+		<Unit filename="D:/cubli/cubli/code/Code/control.h">
+			<Option target="code.elf"/>
+		</Unit>
 		<Unit filename="D:/cubli/cubli/code/Code/mpu6050.c">
 			<Option target="code.elf"/>
 		</Unit>
@@ -121,6 +139,12 @@
 			<Option target="code.elf"/>
 		</Unit>
 		<Unit filename="D:/cubli/cubli/code/Code/oledfont.h">
+			<Option target="code.elf"/>
+		</Unit>
+		<Unit filename="D:/cubli/cubli/code/Code/retarget.c">
+			<Option target="code.elf"/>
+		</Unit>
+		<Unit filename="D:/cubli/cubli/code/Code/retarget.h">
 			<Option target="code.elf"/>
 		</Unit>
 		<Unit filename="D:/cubli/cubli/code/Core/Inc/FreeRTOSConfig.h">
