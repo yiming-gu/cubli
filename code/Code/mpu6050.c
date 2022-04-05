@@ -18,8 +18,8 @@ u8 MPU_Init(void)
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X80);	//复位MPU6050
     delay_ms(100);
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X00);	//唤醒MPU6050 
-	MPU_Set_Gyro_Fsr(3);					//陀螺仪传感器,±2000dps
-	MPU_Set_Accel_Fsr(2);					//加速度传感器,±8g
+	MPU_Set_Gyro_Fsr(0);					//陀螺仪传感器,±2000dps
+	MPU_Set_Accel_Fsr(0);					//加速度传感器,±8g
 	MPU_Set_Rate(1000);						//设置采样率1000Hz
 //	MPU_Write_Byte(MPU_INT_EN_REG,0X00);	//关闭所有中断
 //	MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭

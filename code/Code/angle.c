@@ -3,7 +3,7 @@
 #include "math.h"
 #include "mpu6050.h"
 
-#define delta_T      0.01f  //5ms计算一次
+#define delta_T      0.025f  //5ms计算一次
 //#define M_PI 3.1425f
 
 float I_ex, I_ey, I_ez;  // 误差积分
@@ -58,9 +58,9 @@ void IMU_getValues(float *values)
         lastaccel[i] = values[i];
     }
 
-    values[3] = ((float)gyroX) * M_PI / 180 / 16.4f;
-    values[4] = ((float)gyroY) * M_PI / 180 / 16.4f;
-    values[5] = ((float)gyroZ) * M_PI / 180 / 16.4f;
+    values[3] = ((float)gyroX) * M_PI / 180 / 131.0f;//16.4
+    values[4] = ((float)gyroY) * M_PI / 180 / 131.0f;
+    values[5] = ((float)gyroZ) * M_PI / 180 / 131.0f;
 }
 
 

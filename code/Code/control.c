@@ -18,12 +18,9 @@ void pid_init(void)
 //LQR系数初始化
 void lqr_init(void)
 {
-    lqr.k1 = 500;
-    lqr.k2 = -100;
-    lqr.k3 = 0.01;
-    lqr.angle = 0;
-    lqr.gyro = 0;
-    lqr.lastGyro = 0;
+    lqr.k1 = 100;//100
+    lqr.k2 = 10;//10
+    lqr.k3 = 1;//1
     lqr.speed = 0;
 }
 
@@ -40,9 +37,7 @@ float pid_control(float setSpeed,float actualSpeed)//增量式PID
 
 float LQR_control(float angle, float gyro, float speed)
 {
-    lqr.gyro = gyro;
-    lqr.speed = lqr.k1*angle + lqr.k2*(lqr.gyro - lqr.lastGyro) + lqr.k3*speed;
-    lqr.lastGyro = lqr.gyro;
+    lqr.speed = lqr.k1*angle + lqr.k2*gyro + lqr.k3*speed;
     return lqr.speed;
 }
 

@@ -76,7 +76,7 @@ void StartDefaultTask(void const * argument);
 /* USER CODE BEGIN 0 */
 extern eulerianAngles_t eulerAngle;
 extern short gyroX;
-int val, duty, speed;
+int val, duty, speed=1;
 float gyro;
 /* USER CODE END 0 */
 
@@ -168,17 +168,20 @@ int main(void)
     MPU_Get_Gyroscope();
     MPU_Get_Accelerometer();
     IMU_quaterToEulerianAngles();  // 获取欧拉角
-    gyro = ((float)gyroX) / 16.4f;
-    printf("%.2f, %f\n",eulerAngle.roll, gyro);
+    gyro = ((float)gyroX) / 131.0f;
+    printf("%.2f, %f\n",-eulerAngle.roll, -gyro);
     //编码器获取速度值
     val = read_encoder();
     encoder_manage(&val);
+    val = val*4;
+      printf("%d\n", val);
     //LQR控制器计算期望速度值
     speed = LQR_control(-eulerAngle.roll, -gyro, val);
-
+      printf("%d\n", speed);
+    if(eulerAngle.roll >= 15 || eulerAngle.roll <= -15) speed = 0;
      //电机速度环
     duty = pid_control(speed, val);
-    if(eulerAngle.roll >= 10 || eulerAngle.roll <= -10) duty = 0;
+
     if(duty >= 0){
         PBout(9) = 1;
         __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, duty);
@@ -187,9 +190,9 @@ int main(void)
         PBout(9) = 0;
         __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, -duty);
     }
-    printf("%d\n", val);
 
-    delay_ms(100);
+
+    delay_ms(25);
   }
   /* USER CODE END 3 */
 }

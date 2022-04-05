@@ -19,9 +19,6 @@ typedef struct lqr
     float k1;
     float k2;
     float k3;
-    float angle;
-    float gyro;
-    float lastGyro;
     float speed;
 }LQR;
 
